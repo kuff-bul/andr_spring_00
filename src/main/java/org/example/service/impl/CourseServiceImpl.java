@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.dao.CourseRepository;
 import org.example.dto.CourseRequestDto;
 import org.example.dto.CourseResponseDto;
-import org.example.exception.NotFoundException;
+import org.example.exception.CourseNotFoundException;
 import org.example.mapper.CourseMapper;
 import org.example.model.Course;
 import org.example.model.Teacher;
@@ -72,7 +72,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course findById(Long id) {
         return courseRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Course not found: " + id));
+                .orElseThrow(() -> new CourseNotFoundException(id));
     }
 
     private Teacher resolveTeacher(Long teacherId) {

@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.dao.TeacherRepository;
 import org.example.dto.TeacherRequestDto;
 import org.example.dto.TeacherResponseDto;
-import org.example.exception.NotFoundException;
+import org.example.exception.TeacherNotFoundException;
 import org.example.mapper.TeacherMapper;
 import org.example.model.Teacher;
 import org.example.service.TeacherService;
@@ -58,6 +58,6 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Teacher findById(Long id) {
         return teacherRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Teacher not found: " + id));
+                .orElseThrow(() -> new TeacherNotFoundException(id));
     }
 }

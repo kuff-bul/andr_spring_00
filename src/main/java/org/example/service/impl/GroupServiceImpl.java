@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.dao.GroupRepository;
 import org.example.dto.GroupRequestDto;
 import org.example.dto.GroupResponseDto;
-import org.example.exception.NotFoundException;
+import org.example.exception.GroupNotFoundException;
 import org.example.mapper.GroupMapper;
 import org.example.model.Group;
 import org.example.service.GroupService;
@@ -58,6 +58,6 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public Group findById(Long id) {
         return groupRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Group not found: " + id));
+                .orElseThrow(() -> new GroupNotFoundException(id));
     }
 }

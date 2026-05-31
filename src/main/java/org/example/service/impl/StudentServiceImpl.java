@@ -6,7 +6,8 @@ import org.example.dao.GroupRepository;
 import org.example.dao.StudentRepository;
 import org.example.dto.StudentRequestDto;
 import org.example.dto.StudentResponseDto;
-import org.example.exception.NotFoundException;
+import org.example.exception.GroupNotFoundException;
+import org.example.exception.StudentNotFoundException;
 import org.example.mapper.StudentMapper;
 import org.example.model.Group;
 import org.example.model.Student;
@@ -79,11 +80,11 @@ public class StudentServiceImpl implements StudentService {
 
     private Group findGroupById(Long groupId) {
         return groupRepository.findById(groupId)
-                .orElseThrow(() -> new NotFoundException("Group not found: " + groupId));
+                .orElseThrow(() -> new GroupNotFoundException(groupId));
     }
 
     private Student findById(Long id) {
         return studentRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Student not found: " + id));
+                .orElseThrow(() -> new StudentNotFoundException(id));
     }
 }

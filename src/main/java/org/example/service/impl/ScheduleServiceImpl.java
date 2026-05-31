@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.dao.ScheduleRepository;
 import org.example.dto.ScheduleRequestDto;
 import org.example.dto.ScheduleResponseDto;
-import org.example.exception.NotFoundException;
+import org.example.exception.ScheduleNotFoundException;
 import org.example.mapper.ScheduleMapper;
 import org.example.model.Schedule;
 import org.example.service.CourseService;
@@ -83,7 +83,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     private Schedule findById(Long id) {
         return scheduleRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Schedule not found: " + id));
+                .orElseThrow(() -> new ScheduleNotFoundException(id));
     }
 
     private void applyRelations(Schedule schedule, ScheduleRequestDto requestDto) {
