@@ -40,9 +40,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional(readOnly = true)
     public List<StudentResponseDto> getAll() {
-        return studentRepository.findAll().stream()
-                .map(studentMapper::toResponseDto)
-                .toList();
+        return studentMapper.toResponseDtoList(studentRepository.findAll());
     }
 
     @Override

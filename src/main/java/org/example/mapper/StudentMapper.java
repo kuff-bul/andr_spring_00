@@ -1,5 +1,6 @@
 package org.example.mapper;
 
+import java.util.List;
 import org.example.dto.StudentRequestDto;
 import org.example.dto.StudentResponseDto;
 import org.example.model.Student;
@@ -17,6 +18,8 @@ public interface StudentMapper {
     @Mapping(target = "groupId", source = "group.id")
     @Mapping(target = "groupName", source = "group.name")
     StudentResponseDto toResponseDto(Student student);
+
+    List<StudentResponseDto> toResponseDtoList(List<Student> students);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "group", ignore = true)
