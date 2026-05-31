@@ -1,75 +1,23 @@
 package org.example.service;
 
 import java.util.List;
-import lombok.RequiredArgsConstructor;
-import org.example.dao.CourseRepository;
 import org.example.dto.CourseRequestDto;
 import org.example.dto.CourseResponseDto;
-import org.example.exception.NotFoundException;
-import org.example.mapper.CourseMapper;
 import org.example.model.Course;
-import org.example.model.Teacher;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-@Service
-@RequiredArgsConstructor
-public class CourseService {
+public interface CourseService {
 
-    private final CourseRepository courseRepository;
-    private final TeacherService teacherService;
-    private final CourseMapper courseMapper;
+    CourseResponseDto create(CourseRequestDto requestDto);
 
-    @Transactional
-    public CourseResponseDto create(CourseRequestDto requestDto) {
-        Course course = courseMapper.toEntity(requestDto);
-        course.setTeacher(resolveTeacher(requestDto.getTeacherId()));
-        return courseMapper.toResponseDto(courseRepository.save(course));
-    }
+    CourseResponseDto getById(Long id);
 
-    @Transactional(readOnly = true)
-    public CourseResponseDto getById(Long id) {
-        return courseMapper.toResponseDto(findById(id));
-    }
+    List<CourseResponseDto> getAll();
 
-    @Transactional(readOnly = true)
-    public List<CourseResponseDto> getAll() {
-        return courseRepository.findAll().stream()
-                .map(courseMapper::toResponseDto)
-                .toList();
-    }
+    CourseResponseDto update(Long id, CourseRequestDto requestDto);
 
-    @Transactional
-    public CourseResponseDto update(Long id, CourseRequestDto requestDto) {
-        Course course = findById(id);
-        courseMapper.updateEntity(requestDto, course);
-        course.setTeacher(resolveTeacher(requestDto.getTeacherId()));
-        return courseMapper.toResponseDto(courseRepository.save(course));
-    }
+    void delete(Long id);
 
-    @Transactional
-    public void delete(Long id) {
-        Course course = findById(id);
-        courseRepository.delete(course);
-    }
+    CourseResponseDto assignTeacher(Long courseId, Long teacherId);
 
-    @Transactional
-    public CourseResponseDto assignTeacher(Long courseId, Long teacherId) {
-        Course course = findById(courseId);
-        Teacher teacher = teacherService.findById(teacherId);
-        course.setTeacher(teacher);
-        return courseMapper.toResponseDto(courseRepository.save(course));
-    }
-
-    public Course findById(Long id) {
-        return courseRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Course not found: " + id));
-    }
-
-    private Teacher resolveTeacher(Long teacherId) {
-        if (teacherId == null) {
-            return null;
-        }
-        return teacherService.findById(teacherId);
-    }
+    Course findById(Long id);
 }
