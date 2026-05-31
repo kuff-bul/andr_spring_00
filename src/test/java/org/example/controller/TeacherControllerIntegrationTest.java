@@ -54,7 +54,6 @@ class TeacherControllerIntegrationTest {
     private GroupRepository groupRepository;
 
     private Teacher firstTeacher;
-    private Teacher secondTeacher;
 
     @DynamicPropertySource
     static void configureDatasource(DynamicPropertyRegistry registry) {
@@ -72,7 +71,7 @@ class TeacherControllerIntegrationTest {
         firstTeacher.setFirstName("Ivan");
         firstTeacher.setLastName("Ivanov");
 
-        secondTeacher = new Teacher();
+        Teacher secondTeacher = new Teacher();
         secondTeacher.setFirstName("Petr");
         secondTeacher.setLastName("Petrov");
 
