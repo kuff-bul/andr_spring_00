@@ -1,13 +1,8 @@
 package org.example.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
-public class TeacherResponseDto {
-
-    private Long id;
-    private String firstName;
-    private String lastName;
+public record TeacherResponseDto(
+        Long id,
+        String firstName,
+        String lastName
+) {
 }

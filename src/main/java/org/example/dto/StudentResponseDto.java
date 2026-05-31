@@ -1,15 +1,10 @@
 package org.example.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
-public class StudentResponseDto {
-
-    private Long id;
-    private String firstName;
-    private String lastName;
-    private Long groupId;
-    private String groupName;
+public record StudentResponseDto(
+        Long id,
+        String firstName,
+        String lastName,
+        Long groupId,
+        String groupName
+) {
 }

@@ -87,9 +87,9 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     private void applyRelations(Schedule schedule, ScheduleRequestDto requestDto) {
-        var group = groupService.findById(requestDto.getGroupId());
-        var teacher = teacherService.findById(requestDto.getTeacherId());
-        var course = courseService.findById(requestDto.getCourseId());
+        var group = groupService.findById(requestDto.groupId());
+        var teacher = teacherService.findById(requestDto.teacherId());
+        var course = courseService.findById(requestDto.courseId());
 
         schedule.setGroup(group);
         schedule.setTeacher(teacher);

@@ -27,7 +27,7 @@ public class StudentServiceImpl implements StudentService {
     @Transactional
     public StudentResponseDto create(StudentRequestDto requestDto) {
         var student = studentMapper.toEntity(requestDto);
-        student.setGroup(resolveGroup(requestDto.getGroupId()));
+        student.setGroup(resolveGroup(requestDto.groupId()));
         return studentMapper.toResponseDto(studentRepository.save(student));
     }
 
@@ -49,7 +49,7 @@ public class StudentServiceImpl implements StudentService {
     public StudentResponseDto update(Long id, StudentRequestDto requestDto) {
         var student = findById(id);
         studentMapper.updateEntity(requestDto, student);
-        student.setGroup(resolveGroup(requestDto.getGroupId()));
+        student.setGroup(resolveGroup(requestDto.groupId()));
         return studentMapper.toResponseDto(studentRepository.save(student));
     }
 

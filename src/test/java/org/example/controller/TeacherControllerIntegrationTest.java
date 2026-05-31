@@ -95,9 +95,9 @@ class TeacherControllerIntegrationTest {
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(response.getBody()).isNotNull();
-        assertThat(response.getBody().getId()).isNotNull();
-        assertThat(response.getBody().getFirstName()).isEqualTo("Anna");
-        assertThat(response.getBody().getLastName()).isEqualTo("Smirnova");
+        assertThat(response.getBody().id()).isNotNull();
+        assertThat(response.getBody().firstName()).isEqualTo("Anna");
+        assertThat(response.getBody().lastName()).isEqualTo("Smirnova");
     }
 
     @Test
@@ -110,9 +110,9 @@ class TeacherControllerIntegrationTest {
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();
-        assertThat(response.getBody().getId()).isEqualTo(firstTeacher.getId());
-        assertThat(response.getBody().getFirstName()).isEqualTo("Ivan");
-        assertThat(response.getBody().getLastName()).isEqualTo("Ivanov");
+        assertThat(response.getBody().id()).isEqualTo(firstTeacher.getId());
+        assertThat(response.getBody().firstName()).isEqualTo("Ivan");
+        assertThat(response.getBody().lastName()).isEqualTo("Ivanov");
     }
 
     @Test
@@ -128,7 +128,7 @@ class TeacherControllerIntegrationTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).hasSize(2);
         assertThat(response.getBody())
-                .extracting(TeacherResponseDto::getLastName)
+                .extracting(TeacherResponseDto::lastName)
                 .containsExactlyInAnyOrder("Ivanov", "Petrov");
     }
 
@@ -146,9 +146,9 @@ class TeacherControllerIntegrationTest {
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();
-        assertThat(response.getBody().getId()).isEqualTo(firstTeacher.getId());
-        assertThat(response.getBody().getFirstName()).isEqualTo("Updated");
-        assertThat(response.getBody().getLastName()).isEqualTo("Teacher");
+        assertThat(response.getBody().id()).isEqualTo(firstTeacher.getId());
+        assertThat(response.getBody().firstName()).isEqualTo("Updated");
+        assertThat(response.getBody().lastName()).isEqualTo("Teacher");
     }
 
     @Test
@@ -178,10 +178,7 @@ class TeacherControllerIntegrationTest {
     }
 
     private TeacherRequestDto teacherRequest(String firstName, String lastName) {
-        TeacherRequestDto request = new TeacherRequestDto();
-        request.setFirstName(firstName);
-        request.setLastName(lastName);
-        return request;
+        return new TeacherRequestDto(firstName, lastName);
     }
 
     private void cleanTables() {

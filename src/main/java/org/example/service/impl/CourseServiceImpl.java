@@ -26,7 +26,7 @@ public class CourseServiceImpl implements CourseService {
     @Transactional
     public CourseResponseDto create(CourseRequestDto requestDto) {
         var course = courseMapper.toEntity(requestDto);
-        course.setTeacher(resolveTeacher(requestDto.getTeacherId()));
+        course.setTeacher(resolveTeacher(requestDto.teacherId()));
         return courseMapper.toResponseDto(courseRepository.save(course));
     }
 
@@ -49,7 +49,7 @@ public class CourseServiceImpl implements CourseService {
     public CourseResponseDto update(Long id, CourseRequestDto requestDto) {
         var course = findById(id);
         courseMapper.updateEntity(requestDto, course);
-        course.setTeacher(resolveTeacher(requestDto.getTeacherId()));
+        course.setTeacher(resolveTeacher(requestDto.teacherId()));
         return courseMapper.toResponseDto(courseRepository.save(course));
     }
 
