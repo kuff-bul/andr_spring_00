@@ -17,4 +17,5 @@ public interface StudentService {
     void delete(Long id);
 
     StudentResponseDto assignGroup(Long studentId, Long groupId);
+
 }
